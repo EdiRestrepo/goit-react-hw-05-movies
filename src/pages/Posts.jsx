@@ -22,10 +22,10 @@ export const Posts = () => {
   return (
     <>
     <Link to={backLinkHref}>Go Back</Link>
-      <form onSubmit={hanleSubmit}>
+      {/* <form onSubmit={hanleSubmit}>
         <input type="text" name="search" value={search} onChange={(e)=>{setSearchParams({search:e.target.value})}} />
         <button type='submit'>Search</button>
-      </form>
+      </form> */}
     <ul>
         <li>
             <Link to="/goit-react-hw-05-movies/post/1">Post 1</Link>
