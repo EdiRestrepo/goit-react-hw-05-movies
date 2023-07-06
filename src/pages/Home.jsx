@@ -24,8 +24,6 @@ export const Home = () => {
     fetchData();
   }, []);
 
-  console.log(data);
-
   return (
     <>
       <Container sx={{ mt: 3 }}>

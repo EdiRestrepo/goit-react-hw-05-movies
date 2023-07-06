@@ -4,8 +4,6 @@ import React, { useState } from "react";
 import api from '../service/api'
 import { MovieList } from "../components/MovieList/MovieList";
 
-
-
 export const Movies = () => {
   const [movie, setMovie] = useState("");
   const [loading, setLoading] = useState(false);

@@ -11,7 +11,6 @@ const StyledLink = styled(NavLink)`
     color: black;
     scale: 1.1
   }
-  
 `;
 
 export const Navbar = ({navLinks}) => {

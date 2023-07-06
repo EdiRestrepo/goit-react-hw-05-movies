@@ -1,32 +1,17 @@
+import { Paper, Box, Typography, Button, Container } from "@mui/material";
+import { Img, GenresList } from "../styles/elements.styled";
+import { Link, Outlet, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Link, NavLink, useParams } from "react-router-dom";
-import { Paper, Box, Typography, Button } from "@mui/material";
-import styled from "@emotion/styled";
 import api from "../../service/api";
 import { Loader } from "../Loader";
 
 const baseImageUrl = "https://image.tmdb.org/t/p/";
-
-const Img = styled("img")({
-  width: 200,
-  height: "100%",
-  objectFit: "cover",
-  objectPosition: "center",
-});
-
-const GenresList = styled("ul")({
-  listStyle: "none",
-  display: "flex",
-  padding: 0,
-  gap: "16px",
-});
 
 export const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -42,37 +27,19 @@ export const MovieDetails = () => {
     };
     fetchData();
   }, []);
-  console.log(movieId);
-  console.log(movie);
 
-  const {
-    title,
-    name,
-    release_date,
-    overview,
-    genres,
-    poster_path,
-    vote_average,
-  } = movie;
+  const {title, name, release_date, overview, genres, poster_path,vote_average,} = movie;
   const score = vote_average * 10;
   const scoreToFixed = score.toFixed(2);
 
   return (
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <div>
-          <Paper
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 2,
-              overflow: "hidden",
-              mt: 5,
-              p: 2,
-            }}
-          >
+      {isLoading 
+        ? (<Loader />) 
+        : (<Container>
+            <div>
+            <Paper
+            sx={{display: "flex", alignItems: "center", gap: 2,overflow: "hidden",mt: 5, p: 2,}}>
             <div>
               <Img
                 src={
@@ -103,16 +70,9 @@ export const MovieDetails = () => {
               </GenresList>
             </Box>
           </Paper>
-          <Paper
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 2,
-              overflow: "hidden",
-              mt: 2,
-              p: 2,
-            }}
-          >
+          <Container maxWidth="xs">
+          <Paper 
+            sx={{display: "flex",alignItems: "center",gap: 2,overflow: "hidden",mt: 2,p: 2,}}>
             <Box sx={{ flexGrow: 1, display: "grid", gap: 1 }}>
               <Typography variant="h5">Additional Information</Typography>
               <ul>
@@ -125,7 +85,10 @@ export const MovieDetails = () => {
               </ul>
             </Box>
           </Paper>
+          </Container>
+              <Outlet />
         </div>
+        </Container>
       )}
     </>
   );
