@@ -26,14 +26,31 @@ export const getMovieDetails = async id => {
     const response = await axios.get(
         `movie/${id}?api_key=${API_KEY}${categories.basic}`
     );
-    return response.data
+    return response.data;
 }
 
-export const fakePromise = (time) => new Promise((resolve)=>setTimeout(resolve,time));
+export const getMovieCredits = async id => {
+  const response = await axios.get(
+    `movie/${id}/credits?api_key=${API_KEY}${categories.basic}`
+  );
+  return response.data;
+};
+
+export const getReviews = async id => {
+  const response = await axios.get(
+    `movie/${id}/reviews?api_key=${API_KEY}${categories.basic}&page=1`
+  );
+  return response.data;
+};
+
+export const fakePromise = (time=1500) => new Promise((resolve)=>setTimeout(resolve,time));
 
 export default {
     getMoviesTrending,
     searchMoviesQuery,
     getMovieDetails,
+    getMovieCredits,
+    getReviews,
     fakePromise
 };
+

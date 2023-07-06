@@ -13,6 +13,9 @@ import { SharedLayout } from '../SahredLayout/SharedLayout'
 import { Navbar } from '../navbar'
 import { Movies } from '../../pages/Movies'
 import { MovieDetails } from '../MovieDetails'
+import { Cast } from '../Cast'
+import { Reviews } from '../Reviews'
+
 
 const navLinks = [
   {
@@ -29,15 +32,21 @@ function App() {
 
   return (
     <>
-      <Navbar navLinks={navLinks}/>
-      <Container sx={{mt:3}}>
+      {/* <Navbar navLinks={navLinks}/> */}
+      {/* <Container sx={{mt:3}}> */}
         <Routes>
-          <Route path='/goit-react-hw-05-movies/' element={<Home/>}/>
+          <Route path='/goit-react-hw-05-movies/' element={<Navbar navLinks={navLinks}/>}>
+        
+            <Route index element={<Home/>} />
           <Route path='/goit-react-hw-05-movies/movies' element={<Movies/>}/>
-          <Route path='/goit-react-hw-05-movies/movies/:movieId' element={<MovieDetails/>}/>
+          <Route path='/goit-react-hw-05-movies/movies/:movieId' element={<MovieDetails/>}>
+            <Route path='cast' element={<Cast/>}/>
+            <Route path='reviews' element={<Reviews/>}/>
+          </Route>
           <Route path='*' element={<Home/>}/>
+          </Route>
         </Routes>
-      </Container>
+      {/* </Container> */}
     </>
     // <div>
     //   <Routes>

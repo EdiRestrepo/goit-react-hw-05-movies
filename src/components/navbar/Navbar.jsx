@@ -1,5 +1,5 @@
 import { AppBar, Box, Button, Toolbar } from '@mui/material'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 import PropTypes from "prop-types";
 import React from 'react'
@@ -33,6 +33,7 @@ export const Navbar = ({navLinks}) => {
            </Box>
         </Toolbar>
     </AppBar>
+           <Outlet/>
     </>
   )
 }

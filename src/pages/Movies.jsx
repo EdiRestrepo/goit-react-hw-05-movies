@@ -25,7 +25,7 @@ export const Movies = () => {
       message: "",
     });
     try{
-      await api.fakePromise(1500);
+      await api.fakePromise();
       if(!movie.trim()) throw {message: "The movie field is required"}
       const response = await api.searchMoviesQuery(movie);
       console.log(response.results);
@@ -46,7 +46,7 @@ export const Movies = () => {
 
   return (
     <>
-      <Container maxWidth="xs"  >
+      <Container maxWidth="xs" sx={{ marginTop:5 }}   >
         <Box
           sx={{ display: "grid", gap: 2 }}
           component="form"
