@@ -1,9 +1,11 @@
 import { Paper, Box, Typography, Button, Container } from "@mui/material";
 import { Img, GenresList } from "../styles/elements.styled";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { BackLink } from "../BackLink/BackLink";
 import api from "../../service/api";
 import { Loader } from "../Loader";
+import { createGlobalStyle } from "styled-components";
 
 const baseImageUrl = "https://image.tmdb.org/t/p/";
 
@@ -11,7 +13,12 @@ export const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  
+  const location = useLocation();
+  const backLinkHref = location.state?.from;
+
+
+  console.log(backLinkHref);
+    
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -26,7 +33,7 @@ export const MovieDetails = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [movieId]);
 
   const {title, name, release_date, overview, genres, poster_path,vote_average,} = movie;
   const score = vote_average * 10;
@@ -41,6 +48,7 @@ export const MovieDetails = () => {
             <Paper
             sx={{display: "flex", alignItems: "center", gap: 2,overflow: "hidden",mt: 5, p: 2,}}>
             <div>
+              <BackLink to={location.state?.from ?? '/'}>Go Back</BackLink>
               <Img
                 src={
                   poster_path
@@ -77,10 +85,10 @@ export const MovieDetails = () => {
               <Typography variant="h5">Additional Information</Typography>
               <ul>
                 <li>
-                  <Link to="cast">Cast</Link>
+                  <Link to="cast" state={{ ...location.state }}>Cast</Link>
                 </li>
                 <li>
-                  <Link to="reviews">Reviews</Link>
+                  <Link to="reviews" state={{ ...location.state }}>Reviews</Link>
                 </li>
               </ul>
             </Box>
