@@ -1,10 +1,10 @@
 import { MovieList } from "../components/MovieList/MovieList";
-import { useEffect, useState } from "react";
 import { Container, Typography } from "@mui/material";
+import { Loader } from "../components/Loader/Loader";
+import { useEffect, useState } from "react";
 import api from "../service/api";
-import { Loader } from "../components/Loader";
 
-export const Home = () => {
+const Home = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -41,3 +41,5 @@ export const Home = () => {
     </>
   );
 };
+
+export default Home;

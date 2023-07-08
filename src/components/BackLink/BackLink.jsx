@@ -1,7 +1,8 @@
 import { HiArrowLeft } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import './Back.scss'
+import PropTypes from "prop-types";
+import "./Back.scss";
 
 const StyledLink = styled(Link)`
   display: inline-flex;
@@ -15,15 +16,20 @@ const StyledLink = styled(Link)`
 
   :hover {
     color: orangered;
-    scale: 1.2
+    scale: 1.2;
   }
 `;
 
 export const BackLink = ({ to, children }) => {
   return (
-    <StyledLink to={to} className='back'>
+    <StyledLink to={to} className="back">
       <HiArrowLeft size="24" />
       {children}
     </StyledLink>
   );
+};
+
+BackLink.propTypes = {
+  to: PropTypes.object,
+  children: PropTypes.node,
 };

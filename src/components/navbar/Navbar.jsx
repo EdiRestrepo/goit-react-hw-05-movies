@@ -1,42 +1,45 @@
-import { AppBar, Box, Button, Toolbar } from '@mui/material'
-import { NavLink, Outlet } from 'react-router-dom'
-import styled from 'styled-components'
+import { AppBar, Box, Button, Toolbar } from "@mui/material";
+import { NavLink, Outlet } from "react-router-dom";
+import { Loader } from "../Loader/Loader";
+import styled from "styled-components";
 import PropTypes from "prop-types";
-import React from 'react'
+import { Suspense } from "react";
 
 const StyledLink = styled(NavLink)`
   color: white;
 
   &.active {
     color: black;
-    scale: 1.1
+    scale: 1.1;
   }
 `;
 
-export const Navbar = ({navLinks}) => {
+export const Navbar = ({ navLinks }) => {
   return (
     <>
-    <AppBar position='static'>
+      <AppBar position="static">
         <Toolbar>
-           <Box>
-            {navLinks.map(item=>(
-                <Button
-                    color='inherit'
-                    key={item.title}
-                    component={StyledLink}
-                    to={item.path}
-                >
-                    {item.title}
-                </Button>
+          <Box>
+            {navLinks.map((item) => (
+              <Button
+                color="inherit"
+                key={item.title}
+                component={StyledLink}
+                to={item.path}
+              >
+                {item.title}
+              </Button>
             ))}
-           </Box>
+          </Box>
         </Toolbar>
-    </AppBar>
-           <Outlet/>
+      </AppBar>
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
     </>
-  )
-}
+  );
+};
 
-Navbar.proTypes ={
-    navLinks: PropTypes.array
-}
+Navbar.propTypes = {
+  navLinks: PropTypes.array,
+};
